@@ -7,17 +7,18 @@ def view_playlist(list):
     except IndexError:
         print("\nNo song added")
 
-def add_song(list):
-    song = input("\n song: ")
+def add_song(id):
+    song = input("song: ")
     artist = input("Artist (optional): ")
-
+    
     with open("playlist.csv", 'w', newline='') as playlist:
             writer = csv.writer(playlist)
-            writer.writerow(["Id", song, artist])
+            writer.writerow([id+1, song, artist])
     
 
 def main():
     list = []
+    id = 0
 
     if not os.path.isfile("playlist.csv"):
         with open("playlist.csv", 'w', newline='') as playlist:
@@ -34,7 +35,7 @@ def main():
 
         sys.exit("\nExited") if inp == "5" else inp
         view_playlist(list) if inp == "1" else inp
-        add_song(list) if inp == 2 else inp
+        add_song(id) if inp == 2 else inp
 
 if __name__ == "__main__":
     main()
