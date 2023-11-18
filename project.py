@@ -1,6 +1,7 @@
 from tabulate import tabulate
 import csv, sys, os
 
+
 def view_playlist(list):
     print("\n Your Playlist")
     try:
@@ -63,6 +64,19 @@ def delete_song(list):
     delete_song_id = int(input("Enter id of song you want to delete: "))
     list.pop(delete_song_id)
 
+    for iteration in range(delete_song_id, len(list)):
+        new_id = int(list[iteration][0]) - 1 
+        list[iteration][0] = new_id
+        id = new_id
+
+    compile_csv(list)
+    return list, new_id
+
+def clear_list(list):
+    del list[1:len(list)]
+    compile_csv(list)
+    return list, 0
+
 def main():
     list = []
     id = 0
@@ -83,7 +97,7 @@ def main():
         
     while True:
         
-        home = [["Key", "Action"], ["1", "View Playlist"], ["2", "Add Song"], ["3", "Edit list"], ["4", "Delete Song"], ["5", "Exit Program"]]
+        home = [["Key", "Action"], ["1", "View Playlist"], ["2", "Add Song"], ["3", "Edit list"], ["4", "Delete Song"], ["5", "Clear List"], ["6", "Exit Program"]]
 
         print("\nMain Menu")
         print(tabulate(home[1:], headers=home[0], tablefmt= "heavy_grid"))
@@ -103,9 +117,13 @@ def main():
                 compile_csv(list)
 
             case "4":
-                list = delete_song(list)
+                list, id = delete_song(list)
 
             case "5":
+                confirm = input("Are you sure ? \nPress y for Yes and n for No: ").lower
+                list, id = clear_list(list) if confirm == "y" else confirm
+
+            case "6":
                 sys.exit("\nExited")
 
             case _:
