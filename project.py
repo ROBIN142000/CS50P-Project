@@ -9,9 +9,7 @@ def view_playlist(list):
     except IndexError:
         print("\nNo song added")
 
-def add_song(id, list):
-    song = "Baja" #input("song: ")
-    artist = "Daja" #input("Artist (optional): ")
+def add_song(id, list, song, artist):
 
     list.append( [f"{id}", f"{song}", f"{artist}"] )
     compile_csv(list)
@@ -23,31 +21,25 @@ def compile_csv(list):
             for i in range(0, len(list)):
                 writer.writerow([f"{list[i][0]}", f"{list[i][1]}", f"{list[i][2]}"])
 
-def edit_song(list):
-    edit_id = int(input("Enter id of song which you want to edit "))
-    new_song = input("Type new song: ")
-    list[edit_id][1] = new_song
+def edit_song(list, edit_id, new_song):
+    list[int(edit_id)][1] = new_song
     return list
 
-def edit_artist(list):
-    edit_id = int(input("Enter id of artist which you want to edit "))
-    new_artist = input("Type new artist: ")
-    list[edit_id][2] = new_artist
+def edit_artist(list, edit_id, new_artist):
+    list[int(edit_id)][2] = new_artist
     return list
 
-def edit_list(list):
-    print("\n Edit List")
-    choice_table = [ ["Key", "Action"], ["1", "Edit Song"], ["2", "Add Artist"], ["3", "Edit Song and Artist both"], ["4", "Go back"] ]
-    print(tabulate(choice_table[1:], headers=choice_table[0], tablefmt= "rounded_grid"))
-    choice = input("What do you want to edit ? : ")
-
-
+def edit_list(list, choice):
     match choice:
         case "1":
-            return edit_song(list)
+            edit_id = int(input("Enter id of song which you want to edit "))
+            new_song = input("Type new song: ")
+            return edit_song(list, edit_id, new_song)
 
         case "2":
-            return edit_artist(list)
+            edit_id = int(input("Enter id of artist which you want to edit "))
+            new_artist = input("Type new artist: ")
+            return edit_artist(list, edit_id, new_artist)
         
         case "3":
             list = edit_song(list)
@@ -111,10 +103,16 @@ def main():
                 input("Press any key to go to Menu: ")
 
             case "2":
-                id = add_song(id, list)
+                song = "Baja" #input("song: ")
+                artist = "Daja" #input("Artist (optional): ")
+                id = add_song(id, list, song, artist)
 
             case "3":
-                list = edit_list(list)
+                print("\n Edit List")
+                choice_table = [ ["Key", "Action"], ["1", "Edit Song"], ["2", "Add Artist"], ["3", "Edit Song and Artist both"], ["4", "Go back"] ]
+                print(tabulate(choice_table[1:], headers=choice_table[0], tablefmt= "rounded_grid"))
+                choice = input("What do you want to edit ? : ")
+                list = edit_list(list, choice)
                 compile_csv(list)
 
             case "4":
