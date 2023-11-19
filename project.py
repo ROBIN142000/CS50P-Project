@@ -22,28 +22,58 @@ def compile_csv(list):
                 writer.writerow([f"{list[i][0]}", f"{list[i][1]}", f"{list[i][2]}"])
 
 def edit_song(list, edit_id, new_song):
-    list[int(edit_id)][1] = new_song
+    try:
+        list[int(edit_id)][1] = new_song
+    except IndexError:
+        print("\nInvalid Id")
+        return list
+    
     return list
 
 def edit_artist(list, edit_id, new_artist):
-    list[int(edit_id)][2] = new_artist
+    try:
+        list[int(edit_id)][2] = new_artist
+    except IndexError:
+        print("\nInvalid Id")
+        return list
+    
     return list
 
 def edit_list(list, choice):
     match choice:
         case "1":
-            edit_id = int(input("Enter id of song which you want to edit "))
+            try:
+                edit_id = int(input("Enter id of song which you want to edit ").strip())
+            except ValueError:
+                print("\nId must be integer")
+                return list
             new_song = input("Type new song: ")
             return edit_song(list, edit_id, new_song)
 
         case "2":
-            edit_id = int(input("Enter id of artist which you want to edit "))
-            new_artist = input("Type new artist: ")
+            try:
+                edit_id = int(input("Enter id of artist which you want to edit ").strip())
+            except ValueError:
+                print("\nId must be integer")
+                return list
+            new_artist = input("Type new artist: ").strip()
             return edit_artist(list, edit_id, new_artist)
         
         case "3":
-            list = edit_song(list)
-            return edit_artist(list)
+            try:
+                edit_id = int(input("Enter id of song which you want to edit ").strip())
+            except ValueError:
+                print("\nId must be integer")
+                return list
+            new_song = input("Type new song: ")
+            list = edit_song(list, edit_id, new_song)
+            try:
+                edit_id = int(input("Enter id of artist which you want to edit ").strip())
+            except ValueError:
+                print("\nId must be integer")
+                return list
+            new_artist = input("Type new artist: ").strip()
+            return edit_artist(list, edit_id, new_artist)
 
         case "4":
             return list
@@ -52,9 +82,12 @@ def edit_list(list, choice):
             print("Invalid Input")
             return list
 
-def delete_song(list):
-    delete_song_id = int(input("Enter id of song you want to delete: "))
-    list.pop(delete_song_id)
+def delete_song(list, delete_song_id):
+    try:
+        list.pop(delete_song_id)
+    except IndexError:
+        print("\nList is Empty or Invalid Id")
+        return list, 1
 
     for iteration in range(delete_song_id, len(list)):
         new_id = int(list[iteration][0]) - 1 
@@ -100,26 +133,30 @@ def main():
         match inp:
             case "1":
                 view_playlist(list)
-                input("Press any key to go to Menu: ")
+                input("Press any Enter to go to Menu: ")
 
             case "2":
-                song = "Baja" #input("song: ")
-                artist = "Daja" #input("Artist (optional): ")
+                song = input("song: ").strip()
+                artist = input("Artist (Click enter if you don't want to specify): ").strip()
                 id = add_song(id, list, song, artist)
 
             case "3":
                 print("\n Edit List")
                 choice_table = [ ["Key", "Action"], ["1", "Edit Song"], ["2", "Add Artist"], ["3", "Edit Song and Artist both"], ["4", "Go back"] ]
                 print(tabulate(choice_table[1:], headers=choice_table[0], tablefmt= "rounded_grid"))
-                choice = input("What do you want to edit ? : ")
+                choice = input("What do you want to edit ? : ").strip()
                 list = edit_list(list, choice)
                 compile_csv(list)
 
             case "4":
-                list, id = delete_song(list)
+                try:
+                    delete_song_id = int(input("Enter id of song you want to delete: ").strip())
+                    list, id = delete_song(list, delete_song_id)
+                except ValueError:
+                    print("\nId must be integer")
 
             case "5":
-                confirm = input("Are you sure ?\n Press y for Yes and n for No: ")
+                confirm = input("Are you sure ?\n Press y for Yes and n for No: ").strip()
                 try:
                     list, id = clear_list(list) if confirm.lower() == "y" else confirm
                 except ValueError:
