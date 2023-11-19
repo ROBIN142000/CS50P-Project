@@ -29,4 +29,8 @@ def test_edit_artist():
     assert edit_artist(list, "1", "Justin Beiber") == [ ["Id", "Song", "Artist"], ["1", "Animals", "Justin Beiber"], ["2", "so far away", "Martin Garrix"] ]
 
 def test_clear_list():
-    
+    list = [ ["Id", "Song", "Artist"], ["1", "Animals", "Martin Garrix"], ["2", "so far away", "Martin Garrix"] ]
+    assert clear_list(list) == ([ ["Id", "Song", "Artist"] ], 1)
+
+del test_delete_song():
+    ...
