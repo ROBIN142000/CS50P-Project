@@ -10,8 +10,8 @@ def view_playlist(list):
         print("\nNo song added")
 
 def add_song(id, list):
-    song = input("song: ")
-    artist = input("Artist (optional): ")
+    song = "Baja" #input("song: ")
+    artist = "Daja" #input("Artist (optional): ")
 
     list.append( [f"{id}", f"{song}", f"{artist}"] )
     compile_csv(list)
@@ -75,7 +75,8 @@ def delete_song(list):
 def clear_list(list):
     del list[1:len(list)]
     compile_csv(list)
-    return list, 0
+
+    return list, 1
 
 def main():
     list = []
@@ -120,9 +121,12 @@ def main():
                 list, id = delete_song(list)
 
             case "5":
-                confirm = input("Are you sure ? \nPress y for Yes and n for No: ").lower
-                list, id = clear_list(list) if confirm == "y" else confirm
-
+                confirm = input("Are you sure ?\n Press y for Yes and n for No: ")
+                try:
+                    list, id = clear_list(list) if confirm.lower() == "y" else confirm
+                except ValueError:
+                    pass
+                    
             case "6":
                 sys.exit("\nExited")
 
