@@ -1,1 +1,2 @@
-# CS50P-Project
+# PLAYLIST IN PYTHON
+#### Description: This is a playlist application for your songs

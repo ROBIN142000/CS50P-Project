@@ -1,5 +1,5 @@
 from tabulate import tabulate
-import csv, sys, os
+import csv, os
 
 
 def view_playlist(list):
@@ -163,7 +163,8 @@ def main():
                     pass
                     
             case "6":
-                sys.exit("\nExited")
+                print("Exited")
+                break
 
             case _:
                 input("Invalid input\nPress any key to go to Menu")
