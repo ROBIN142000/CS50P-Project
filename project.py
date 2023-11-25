@@ -83,6 +83,7 @@ def edit_list(list, choice):
             return list
 
 def delete_song(list, delete_song_id):
+    id = 0
     try:
         list.pop(delete_song_id)
     except IndexError:
@@ -95,7 +96,7 @@ def delete_song(list, delete_song_id):
         id = new_id
 
     compile_csv(list)
-    return list, new_id
+    return list, id
 
 def clear_list(list):
     del list[1:len(list)]
