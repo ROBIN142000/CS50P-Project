@@ -128,7 +128,7 @@ def main():
         print("\nMain Menu")
         print(tabulate(home[1:], headers=home[0], tablefmt= "heavy_grid"))
 
-        inp = input("Input: ")
+        inp = input("Input: ").strip()
 
         match inp:
             case "1":
