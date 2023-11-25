@@ -43,7 +43,7 @@ def edit_list(list, choice):
     match choice:
         case "1":
             try:
-                edit_id = int(input("Enter id of song which you want to edit ").strip())
+                edit_id = int(input("Enter id of song which you want to edit: ").strip())
             except ValueError:
                 print("\nId must be integer")
                 return list
@@ -52,7 +52,7 @@ def edit_list(list, choice):
 
         case "2":
             try:
-                edit_id = int(input("Enter id of artist which you want to edit ").strip())
+                edit_id = int(input("Enter id of artist which you want to edit: ").strip())
             except ValueError:
                 print("\nId must be integer")
                 return list
@@ -61,14 +61,14 @@ def edit_list(list, choice):
         
         case "3":
             try:
-                edit_id = int(input("Enter id of song which you want to edit ").strip())
+                edit_id = int(input("Enter id of song which you want to edit: ").strip())
             except ValueError:
                 print("\nId must be integer")
                 return list
             new_song = input("Type new song: ")
             list = edit_song(list, edit_id, new_song)
             try:
-                edit_id = int(input("Enter id of artist which you want to edit ").strip())
+                edit_id = int(input("Enter id of artist which you want to edit: ").strip())
             except ValueError:
                 print("\nId must be integer")
                 return list
