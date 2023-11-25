@@ -23,11 +23,11 @@ The `project.py` file is the main programe and it contains the all the code of t
 
     Throws error if there is no song whose id matches with `edit_id` .
 
-6. **edit_artist:** The `edit_artist` function takes `list` variable, an `edit_id` and a `new_artist` both provided by the user. It then replaces the artist in the `list` variable whose id matches with the `edit_id` with the `new_artist`. It returns the edited `list` variable.
+6. **edit_artist:** The `edit_artist()` function takes `list` variable, an `edit_id` and a `new_artist` both provided by the user. It then replaces the artist in the `list` variable whose id matches with the `edit_id` with the `new_artist`. It returns the edited `list` variable.
     
     Throws error if there is no artist whose id matches with `edit_id.`
 
-7. **edit_list:** The `edit_list` function takes `list` variable and `choice` provided by the user and calls `edit_song`, `edit_artist` or both according the `choice` provided by the user and returns the value returned by these functions. It also returns an unchanged `list` variable if user cancels edit or if the value of `choice` is invalid.
+7. **edit_list:** The `edit_list()` function takes `list` variable and `choice` provided by the user and calls `edit_song`, `edit_artist` or both according the `choice` provided by the user and returns the value returned by these functions. It also returns an unchanged `list` variable if user cancels edit or if the value of `choice` is invalid.
 
     Throws error if `edit_id` does not match id of the song or artist on the `list` variable.
 
