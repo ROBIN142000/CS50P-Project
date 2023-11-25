@@ -27,7 +27,7 @@ The `project.py` file is the main programe and it contains the all the code of t
 
 8. **delete_song:** `The delete_song()` function takes `list` variable and `delete_song_id` which is provided by the user and then deletes the song whose id matches with `delete_song_id` in the `list` variable and then decrement id of all the songs below the deleted song by 1. Then it calls the `compile_csv()` function to update the playlist. Throws error if there is no song whose id matches with `delete_song_id`.
 
-9. **clear_list:** The `clear_list()` function takes the `list` variable and deletes elements from second index or second element to the end index. It then returned this edited list.
+9. **clear_list:** The `clear_list()` function takes the `list` variable and deletes elements from second index or second element to the end index. It then calls `compile_csv` function and returns this edited list.
 
    
 
