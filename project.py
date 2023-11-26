@@ -157,7 +157,7 @@ def main():
                     print("\nId must be integer")
 
             case "5":
-                confirm = input("Are you sure ?\n Press y for Yes and n for No: ").strip()
+                confirm = input("Are you sure ?\nPress y for Yes and n for No: ").strip()
                 try:
                     list, id = clear_list(list) if confirm.lower() == "y" else confirm
                 except ValueError:
